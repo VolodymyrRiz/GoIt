@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "repository_first",
+			"path": "repository_first"
+		},
+		{
+			"name": "repository_first",
+			"path": "../repository_first"
+		}
+	],
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"goit.vscode-activity"
+		]
+	}
+}
