@@ -19,8 +19,8 @@ def amount_payment(payment):
         result = result + sum
         print(sum)
     print(result)
-    #return payment
+    return payment
    
 
-amount_payment('10', '20', '30')
-pass
+dani = dani('10', '20', '30')
+print(amount_payment(dani))
