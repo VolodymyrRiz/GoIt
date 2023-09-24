@@ -1,6 +1,5 @@
-args = ''
+aargs = ''
 item = [*args]
-#recept = ''
 
 
 def format_ingredients(item):
@@ -10,7 +9,7 @@ def format_ingredients(item):
         recept = None
         return recept
     
-    recept = ''
+    recept = ' '
     i = 0
     i_len = len(item)     
             
@@ -36,4 +35,5 @@ def format_ingredients(item):
             recept = recept + f'{komp}' + ', '
                 
          
-print(format_ingredients(["www", 'eee']))
+druk = format_ingredients(["www", 'eee', 'hhhhh'])
+print(druk)
