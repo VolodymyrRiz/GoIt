@@ -1,4 +1,4 @@
-aargs = ''
+args = ''
 item = [*args]
 
 
@@ -9,7 +9,7 @@ def format_ingredients(item):
         recept = None
         return recept
     
-    recept = ' '
+    recept = ''
     i = 0
     i_len = len(item)     
             
