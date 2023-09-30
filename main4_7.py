@@ -16,21 +16,23 @@ def calculate_distance(coordinates):
         if count < len_coor - 1:
                         
             char = coordinates[count:count+2]
-            print(char)
+            #print(char)
             char_1 = char[0]
             char_2 = char[1]
             if char_1 > char_2:
                 char.reverse()
-                print(char)
+                #print(char)
             count += 1
-            # if char in points:
+            char = tuple(char)
+            #print(type(char))
+            if char in points:
+                res_1 = points.pop(char)
                 
-            #     print(char)
-            #     res = res + char.values()
-            #     print(res)
+                res = res + res_1
+                print(res)
             
-            # else:
-            #     continue
+            else:
+                continue
               
 
     return res
