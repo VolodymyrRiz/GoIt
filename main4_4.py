@@ -1,23 +1,16 @@
-key = dict()
-
+key = None
+grade = dict()
 
 def get_grade(key):
-    
-   
 
-    key = {'F': 1, 'FX': 2, 'E': 3, 'D': 3, 'C': 4, 'B': 5, 'A': 5}
-
-    for key_select in key.values():
-         if key_select == None:
-             return
-         print(key_select)
-    return
+    grade = {"A": 5, "B": 5, "C": 4, "D": 3, "E": 3, "FX": 2, "F": 1}  #
+    return grade.get(key, None)
     
     
-
-
 def get_description(key):
-    key = {
+    print(type(key))
+        
+    grade = {              
         'F': 'Unsatisfactorily', 
         'FX': 'Unsatisfactorily', 
         'E': 'Enough', 
@@ -26,13 +19,9 @@ def get_description(key):
         'B': 'Very good', 
         'A': 'Perfectly'}
     
-    for key_select in key.values():
-         if key_select == None:
-             return
-         print(key_select)
-    return
-    
+    return grade.get(key, None)
+            
         
-        
-get_grade(key) 
-get_description(key)    
+print(get_grade(key))
+#print(get_grade(get_grade(key)))
+print(get_description(key))     
