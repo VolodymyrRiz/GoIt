@@ -2,16 +2,18 @@ from random import randint
 #count = 0
 #result = ''
 #password = ''
+i = 0
 
 def get_random_password():
     result = ""
     count = 0
+      
     while count < 8:
         random_symbol = chr(randint(40, 126))
         result = result + random_symbol
         count = count + 1     
         password = result
-        
+                    
     return is_valid_password(password)
 
 
@@ -33,18 +35,11 @@ def is_valid_password(password):
     if has_upper and has_lower and has_num:
         return password
     else:
-        return "Try more"
+        return 'Try more'
 
 
 def get_password():
-    password = ''
 
-    if password:
-        return password
-    else:
-        return get_random_password()
-
-i = 0           
-while i < 10:
-    i += 1
-    print(get_password())
+    return get_random_password()
+   
+print(get_password())
