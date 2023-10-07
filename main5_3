@@ -1,2 +1,3 @@
-a = "     345345345"
-a.lstrip()
+a = 'SAS'
+i = a.isupper()
+print(i)
