@@ -60,6 +60,3 @@ if __name__ == '__main__':
 
     print(f'EXTENSIONS: {EXTENSIONS}')
     print(f'UNKNOWN: {UNKNOWN}')
-
-
-
