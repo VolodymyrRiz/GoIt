@@ -1,3 +1,0 @@
-a = 'SAS'
-i = a.isupper()
-print(i)
