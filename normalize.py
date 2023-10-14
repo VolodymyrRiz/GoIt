@@ -12,7 +12,6 @@ for cyrillic, latin in zip(CYRILLIC_SYMBOLS, TRANSLATION):
 
 
 def normalize(name: str) -> str:
+    print("ПЕРЕЙМЕНОВУЮ ПАПКИ ТА ФАЙЛИ З МЕТОЮ НОРМАЛІЗАЦІЇ НАЗВ........")
     translate_name = re.sub(r'\W\[^.]', '_', name.translate(TRANS))
     return translate_name
-
-print(normalize(name))
