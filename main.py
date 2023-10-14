@@ -7,6 +7,10 @@ from normalize import normalize
 def handle_media(file_name: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
     file_name.replace(target_folder / normalize(file_name.name))
+    
+def handle_doc(file_name: Path, target_folder: Path):
+    target_folder.mkdir(exist_ok=True, parents=True)
+    file_name.replace(target_folder / normalize(file_name.name))
 
 def handle_archive(file_name: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
@@ -21,6 +25,7 @@ def handle_archive(file_name: Path, target_folder: Path):
 
 
 def main(folder: Path):
+    print('ПОЧИНАЮ УПОРЯДКУВАННЯ ВАШОЇ ПАПКИ. Невідомі файли будуть у папці "MY_OTHER"')
     file_parser.scan(folder)
     for file in file_parser.JPEG_IMAGES:
         handle_media(file, folder / 'images' / 'JPEG')
@@ -29,12 +34,25 @@ def main(folder: Path):
     for file in file_parser.PNG_IMAGES:
         handle_media(file, folder / 'images' / 'PNG')
     for file in file_parser.SVG_IMAGES:
-        handle_media(file, folder / 'images' / 'SVG')
+        handle_media(file, folder / 'images' / 'SVG')        
+    for file in file_parser.AVI_VIDEOS:
+        handle_media(file, folder / 'videos' / 'AVI')
+    for file in file_parser.MP4_VIDEOS:
+        handle_media(file, folder / 'videos' / 'MP4')        
     for file in file_parser.MP3_AUDIO:
         handle_media(file, folder / 'audio' / 'MP3_AUDIO')
+    for file in file_parser.WAV_AUDIO:
+        handle_media(file, folder / 'audio' / 'WAV_AUDIO')         
+    for file in file_parser.DOC_DOCUMENTS:
+        handle_doc(file, folder / 'documents' / 'DOC')  
+    for file in file_parser.DOCX_DOCUMENTS:
+        handle_doc(file, folder / 'documents' / 'DOCX')   
+    for file in file_parser.PDF_DOCUMENTS:
+        handle_doc(file, folder / 'documents' / 'PDF') 
+    for file in file_parser.XLS_DOCUMENTS:
+        handle_doc(file, folder / 'documents' / 'XLS')        
     for file in file_parser.MY_OTHER:
         handle_media(file, folder / 'MY_OTHER')
-
     for file in file_parser.ARCHIVES:
         handle_archive(file, folder / 'ARCHIVES')
 
@@ -48,4 +66,5 @@ def main(folder: Path):
 if __name__ == "__main__":
     folder_process = Path(sys.argv[1])
     main(folder_process.resolve())
+    print('РОБОТУ ЗАВЕРШЕНО!')
     
