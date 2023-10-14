@@ -6,6 +6,13 @@ JPG_IMAGES = []
 PNG_IMAGES = []
 SVG_IMAGES = []
 MP3_AUDIO = []
+WAV_AUDIO = []
+AVI_VIDEOS = []
+MP4_VIDEOS = []
+DOC_DOCUMENTS = []
+DOCX_DOCUMENTS = []
+XLS_DOCUMENTS = []
+PDF_DOCUMENTS = []
 MY_OTHER = []
 ARCHIVES = []
 
@@ -16,6 +23,14 @@ REGISTER_EXTENSION = {
     'SVG': SVG_IMAGES,
     'MP3': MP3_AUDIO,
     'ZIP': ARCHIVES,
+    'PDF': PDF_DOCUMENTS,
+    'DOC': DOC_DOCUMENTS,
+    'DOCX': DOCX_DOCUMENTS,
+    'WAV': WAV_AUDIO,
+    'XLS': XLS_DOCUMENTS,
+    'RAR': ARCHIVES,
+    'AVI': AVI_VIDEOS,
+    'MP4': MP4_VIDEOS
 }
 
 FOLDERS = []
@@ -27,6 +42,7 @@ def get_extension(name: str) -> str:
     return Path(name).suffix[1:].upper()  # suffix[1:] -> .jpg -> jpg
 
 def scan(folder: Path):
+    print("СКАНУЮ ПАПКИ ТА ФАЙЛИ. Зачекайте..........")
     for item in folder.iterdir():
         # Робота з папкою
         if item.is_dir():  # перевіряємо чи обєкт папка
@@ -52,11 +68,4 @@ def scan(folder: Path):
 if __name__ == '__main__':
     folder_process = sys.argv[1]
     scan(Path(folder_process))
-    print(f'Images jpeg: {JPEG_IMAGES}')
-    print(f'Images jpg: {JPG_IMAGES}')
-    print(f'Images png: {PNG_IMAGES}')
-    print(f'AUDIO mp3: {MP3_AUDIO}')
-    print(f'Archives zip: {ARCHIVES}')
-
-    print(f'EXTENSIONS: {EXTENSIONS}')
-    print(f'UNKNOWN: {UNKNOWN}')
+    
