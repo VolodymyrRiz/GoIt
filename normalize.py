@@ -1,8 +1,8 @@
 import re
 
-CYRILLIC_SYMBOLS = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ'
+CYRILLIC_SYMBOLS = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"?*()+-%!№=@# '
 TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
-               "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "u", "ja", "je", "ji", "g")
+               "f", "h", "ts", "ch", "sh", "sch", "_", "y", "_", "e", "yu", "u", "ja", "je", "ji", "g", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_")
 
 TRANS = dict()
 
@@ -15,4 +15,4 @@ def normalize(name: str) -> str:
     translate_name = re.sub(r'\W\[^.]', '_', name.translate(TRANS))
     return translate_name
 
-print(normalize("аппппррр777.pdf"))
+print(normalize(name))
