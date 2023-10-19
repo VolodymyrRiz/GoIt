@@ -1,0 +1,8 @@
+setup.py
+vvr/_init_.py
+vvr/main.py
+vvr.egg-info/PKG-INFO
+vvr.egg-info/SOURCES.txt
+vvr.egg-info/dependency_links.txt
+vvr.egg-info/entry_points.txt
+vvr.egg-info/top_level.txt
