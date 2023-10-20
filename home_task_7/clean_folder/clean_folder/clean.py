@@ -150,7 +150,7 @@ def main(folder: Path):
 def start():
     if sys.argv[1]:
         folder_process = Path(sys.argv[1])
-        main(folder_process)  
+        main(folder_process.resolve())  
         print('РОБОТУ ЗАВЕРШЕНО!')          
 
 # if __name__ == "__main__":
