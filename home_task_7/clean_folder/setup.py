@@ -9,5 +9,5 @@ setup(
     author_email='v.v.rizun@gmail.com',
     license='NNN',
     packages=find_namespace_packages(),
-    entry_points={'console_scripts': ['clean=clean_folder.clean:start']}
+    entry_points={'console_scripts': ['clean-folder=clean_folder.clean:start']}
 )

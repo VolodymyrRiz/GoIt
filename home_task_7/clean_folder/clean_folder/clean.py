@@ -64,8 +64,14 @@ def main(folder: Path):
             folder.rmdir()
         except OSError:
             print(f'Error during remove folder {folder}')
+            
+def start():
+    if sys.argv[1]:
+        folder_process = Path(sys.argv[1])
+        main(folder_process)  
+        print('РОБОТУ ЗАВЕРШЕНО!')          
 
-if __name__ == "__main__":
-    folder_process = Path(sys.argv[1])
-    main(folder_process.resolve())
-    print('РОБОТУ ЗАВЕРШЕНО!')
+# if __name__ == "__main__":
+#     folder_process = Path(sys.argv[1])
+#     main(folder_process.resolve())
+#     print('РОБОТУ ЗАВЕРШЕНО!')
