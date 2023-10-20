@@ -6,5 +6,5 @@ clean_folder.egg-info/SOURCES.txt
 clean_folder.egg-info/dependency_links.txt
 clean_folder.egg-info/entry_points.txt
 clean_folder.egg-info/top_level.txt
-test_papka/main4.py
-test_papka/sort.py
+clean_folder/test_papka/main4.py
+clean_folder/test_papka/sort.py
