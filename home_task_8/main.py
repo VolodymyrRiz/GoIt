@@ -10,11 +10,13 @@ user_week = {'Monday': [],
 
 def get_birthdays_per_week(users):
     date_now = datetime.now().date()
+    print(date_now)
     day_now = date_now.weekday()
     print(day_now)
     for day in range(day_now, 6):
         print(day)
         if day == 0:
+            
             
 
     # Реалізуйте тут домашнє завдання
