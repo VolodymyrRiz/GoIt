@@ -15,7 +15,7 @@ users = [
         {"name": "Jan Forest", "birthday": datetime(1978, 12, 5).date()},#
         {"name": "Jan Tard", "birthday": datetime(1980, 11, 3).date()},#
         {"name": "Jan Weis", "birthday": datetime(1990, 11, 4).date()},#
-        {"name": "Jan Flint", "birthday": datetime(1972, 10, 23).date()},#
+        {"name": "Jan Flint", "birthday": datetime(1972, 10, 27).date()},#
         {"name": "Jan Boss", "birthday": datetime(1976, 10, 30).date()},#
         {"name": "Jan Grape", "birthday": datetime(1977, 11, 1).date()},#
         {"name": "Jan Bad", "birthday": datetime(1977, 11, 5).date()},#
