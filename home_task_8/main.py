@@ -16,9 +16,9 @@ def get_birthdays_per_week(users):
     #count_day = 1
     #value_true = None
     
-    date_now = datetime(year=2023, month=10, day=23)
+    #date_now = datetime(year=2023, month=10, day=23)
     #date_now = datetime.now().date()
-    #date_now = date.today()
+    date_now = date.today()
     #print(date_now)
     day_now = date_now.weekday()
     #print(day_now)
@@ -31,7 +31,7 @@ def get_birthdays_per_week(users):
         a = '''Дні народження в суботу та неділю цього тижня 
 будуть включені в понеділок наступного тижня,
 якщо ви сформуєте розклад на наступний тиждень 
-у понеділок'''
+з понеділка'''
         print(a)
         return user_week
         
@@ -44,7 +44,7 @@ def get_birthdays_per_week(users):
         day_next = day
         
         #print(day_next)
-        
+     # Обробка вихідних днів   
         if day == 0:
             #end_of_week = 7 - day_now #4
             #end_date_week = int(date) + end_of_week - 2 #27
@@ -91,7 +91,7 @@ def get_birthdays_per_week(users):
                     #print(key_dict)    
                     user_week.update({day_next_word: key_dict}) 
             #print(user_week)  
-                    
+     # Обробка актуального дня               
         if day == day_now:
             #print(day_now)
             for dict in users:
@@ -113,7 +113,7 @@ def get_birthdays_per_week(users):
                         
                 #print(user_week)           
         
-        
+     # Обробка наступних днів   
         
         #day_next = day_now + count_day    #1
         if day_next == 1:
