@@ -13,10 +13,10 @@ user_week = {'Monday': [],
 def get_birthdays_per_week(users):
     
     key_dict = []
-    count_day = 1
-    value_true = None
+    #count_day = 1
+    #value_true = None
     
-    date_now = datetime(year=2023, month=10, day=16)
+    date_now = datetime(year=2023, month=10, day=23)
     #date_now = datetime.now().date()
     #date_now = date.today()
     #print(date_now)
@@ -236,8 +236,8 @@ if __name__ == "__main__":
         {"name": "Jan Tard", "birthday": datetime(1980, 10, 14).date()},
         {"name": "Jan Weis", "birthday": datetime(1972, 10, 15).date()},
         {"name": "Jan Flint", "birthday": datetime(1972, 10, 16).date()},
-        {"name": "Jan Boss", "birthday": datetime(1972, 10, 17).date()},
-        {"name": "Jan Grape", "birthday": datetime(1972, 10, 17).date()},
+        {"name": "Jan Boss", "birthday": datetime(1972, 10, 22).date()},
+        {"name": "Jan Grape", "birthday": datetime(1972, 10, 27).date()},
         {"name": "Jan Bad", "birthday": datetime(1977, 10, 18).date()},
     ]
 
