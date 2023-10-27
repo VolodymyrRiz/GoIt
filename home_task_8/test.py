@@ -15,7 +15,7 @@ users = [
         {"name": "Jan Forest", "birthday": datetime(1978, 12, 5).date()},#
         {"name": "Jan Tard", "birthday": datetime(1980, 11, 3).date()},#
         {"name": "Jan Weis", "birthday": datetime(1990, 11, 4).date()},#
-        {"name": "Jan Flint", "birthday": datetime(1972, 10, 27).date()},#
+        {"name": "Jan Flint", "birthday": datetime(1972, 10, 31).date()},#
         {"name": "Jan Boss", "birthday": datetime(1976, 10, 30).date()},#
         {"name": "Jan Grape", "birthday": datetime(1977, 11, 1).date()},#
         {"name": "Jan Bad", "birthday": datetime(1977, 11, 5).date()},#
@@ -24,10 +24,10 @@ users = [
 key_dict = []
 count_day = 1
 value_true = None
+date_now = datetime(year=2023, month=10, day=30)
 
-
-date_now = datetime.now().date()
-#print(date_now)
+#date_now = datetime.now().date()
+print(date_now)
 day_now = date_now.weekday()
 day_now_word = date_now.strftime("%A")
 month = date_now.strftime("%m")
