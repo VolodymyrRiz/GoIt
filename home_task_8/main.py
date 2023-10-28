@@ -10,23 +10,22 @@ user_week = {'Monday': [],
 
 def get_birthdays_per_week(users):
     
-    b = "Робити календар днів народжень із сьогоднішнього дня\n чи з наступного понеділка або якогось наступного дня?\n З наступного понеділка або якогось наступного дня? Натиснйть 1.\n З сьогоднішнього дня? Натисніть 0." 
-    print(b)   
-    d = input()
+    # b = "Робити календар днів народжень із сьогоднішнього дня\n чи з наступного понеділка або якогось наступного дня?\n З наступного понеділка або якогось наступного дня? Натиснйть 1.\n З сьогоднішнього дня? Натисніть 0." 
+    # print(b)   
+    # d = input()
     
-    if d == '1':
-        print('Уведіть число дня')
-        d = int(input())
-        date_now = date.today() 
-        rik = date_now.year
-        misiac = date_now.month
-        den = date_now.day     
+    # if d == '1':
+    #     print('Уведіть число дня')
+    #     d = int(input())
+    #     date_now = date.today() 
+    #     rik = date_now.year
+    #     misiac = date_now.month
+    #     den = date_now.day     
        
-        date_now = datetime(rik, misiac, d) 
+    #     date_now = datetime(rik, misiac, d) 
         
-    else:
-        date_now = date.today()
-        
+    # else:
+    date_now = date.today()        
           
     key_dict = []             
      
