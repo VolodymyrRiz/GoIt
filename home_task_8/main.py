@@ -13,20 +13,16 @@ user_week = {'Monday': [],
 def get_birthdays_per_week(users):
     
     key_dict = []
-    #count_day = 1
-    #value_true = None
+        
+    date_now = datetime(year=2023, month=10, day=23)   
+    #date_now = date.today()
     
-    #date_now = datetime(year=2023, month=10, day=23)
-    #date_now = datetime.now().date()
-    date_now = date.today()
-    #print(date_now)
     day_now = date_now.weekday()
-    #print(day_now)
+    
     day_now_word = date_now.strftime("%A")
     month = date_now.strftime("%m")
     date_ = date_now.strftime("%d")
-    #print(date_)
-    
+        
     if day_now == 5 or day_now == 6:
         a = '''Дні народження в суботу та неділю цього тижня 
 будуть включені в понеділок наступного тижня,
@@ -35,100 +31,75 @@ def get_birthdays_per_week(users):
         print(a)
         return user_week
         
-    for day in range(day_now, 5):
-        #print(day)
-        key_dict = []       
-        #end_of_week = 7 - day_now #7
-        #end_date_week = int(date_) + end_of_week - 2 #21
-        #print(end_date_week)
+    for day in range(day_now, 5):        
+        key_dict = []               
         day_next = day
         
-        #print(day_next)
+        
      # Обробка вихідних днів   
         if day == 0:
-            #end_of_week = 7 - day_now #4
-            #end_date_week = int(date) + end_of_week - 2 #27
-            #print(end_date_week)
-            
-            #print(day_next)
-               
-            for dict in users:
-                #print(dict)        
+                          
+            for dict in users:                   
                 
                 for key, value in dict.items():
                     pass
-                    #print(type(value))
+                   
                 value_month = value.strftime('%m')
-                #print('   ', value_month)
+                
                 value_date_next = value.strftime('%d')
                 if int(value_date_next) == int(date_) - 2:
-                    #day_next = 5
+                   
                     day_next_word = 'Monday'
                 if int(value_date_next) == int(date_) - 1:
-                    #day_next = 6
+                  
                     day_next_word = 'Monday'
-                #print(value_date_next)
-                            
-                #print(day_next_word)
-                #print(value_day)
-                #print(str(day_now))
-                #print(type(value)) 
-                #print(';;;;;;', day_next)
+                
                 if value_month == month and int(value_date_next) == int(date_) - 2: 
-                     #and day_next == 5        
+                           
                     value = dict.get('name')
                     key_dict.append(value)  
-                    #print('iiiiiiiiiiiiiiiiiiiiiiii')
-                    #print(key_dict)  
+                    
                     user_week.update({day_next_word: key_dict}) 
-                    #count_day += 1     
-                    #day_next = 6 
-                    #value_true = value
+                   
                 if value_month == month and int(value_date_next) == int(date_) - 1: 
-                     #and day_next == 6            
+                            
                     value = dict.get('name')
                     key_dict.append(value)  
-                    #print(key_dict)    
+                       
                     user_week.update({day_next_word: key_dict}) 
-            #print(user_week)  
+            
      # Обробка актуального дня               
         if day == day_now:
-            #print(day_now)
+            
             for dict in users:
-                #print(dict)
-                
+                                
                 for key, value in dict.items():
                     pass
-                    #print(type(value))
+                   
                 value_month = value.strftime('%m')
                 value_date = value.strftime('%d')
-                #print(value_date)
-                #print(str(day_now))
-                
+                                
                 if value_month == month and value_date == date_:
-                    #print("kkkkkkkkkkkkkkkkkkk")
+                    
                     value = dict.get('name')
                     key_dict.append(value)    
-                    user_week.update({day_now_word: key_dict})  
-                        
-                #print(user_week)           
+                    user_week.update({day_now_word: key_dict})                          
+                       
         
      # Обробка наступних днів   
         
-        #day_next = day_now + count_day    #1
+        
         if day_next == 1:
             day_next_word = 'Tuesday'    
             for dict in users:
-                #print(dict)        
+                    
                 
                 for key, value in dict.items():
                     pass
-                    #print()
-                value_month = value.strftime('%m')
-                #print(value_month)
+                    
+                value_month = value.strftime('%m')                
                 value_date_next = value.strftime('%d')
-                #print(value_date_next)
-            
+                            
                 if value_month == month and day_next > day_now and int(value_date_next) == int(date_) + 1:
                                 
                     print(day_next_word)
@@ -138,23 +109,17 @@ def get_birthdays_per_week(users):
                     key_dict.append(value)   
                     print(key_dict)
                     user_week.update({day_next_word: key_dict}) 
-                    #count_day += 1     
-            #day_next = day_now + count_day
-            #print(day_next)
-            #key_dict = []     
-            
+                              
         if day_next == 2:
             day_next_word = 'Wednesday'         
-            for dict in users:
-                #print(dict)        
+            for dict in users:                     
                 
                 for key, value in dict.items():
                     pass
-                    #print()
-                value_month = value.strftime('%m')
-                #print(value_month)
+               
+                value_month = value.strftime('%m')                
                 value_date_next = value.strftime('%d')
-                #print(value_date_next)
+                
                 if value_month == month and day_next > day_now and int(value_date_next) == int(date_) + 2:
                                 
                     print(day_next_word)
@@ -164,22 +129,17 @@ def get_birthdays_per_week(users):
                     key_dict.append(value)   
                     print(key_dict)
                     user_week.update({day_next_word: key_dict}) 
-                    #count_day += 1     
-            #day_next = day_now + count_day
-            #key_dict = []  
-            
+                                
         if day_next == 3:
             day_next_word = 'Thursday'    
             for dict in users:
-                #print(dict)        
-                
+                                
                 for key, value in dict.items():
                     pass
-                    #print()
-                value_month = value.strftime('%m')
-                #print(value_month)
+                    
+                value_month = value.strftime('%m')                
                 value_date_next = value.strftime('%d')
-                #print(value_date_next)
+                
                 if value_month == month and day_next > day_now and int(value_date_next) == int(date_) + 3:
                                 
                     print(day_next_word)
@@ -188,23 +148,18 @@ def get_birthdays_per_week(users):
                     print(value)
                     key_dict.append(value)   
                     print(key_dict)
-                    user_week.update({day_next_word: key_dict}) 
-                    #count_day += 1     
-            #day_next = day_now + count_day 
-            #key_dict = []       
+                    user_week.update({day_next_word: key_dict})                     
         
         if day_next == 4:
             day_next_word = 'Friday'          
-            for dict in users:
-                #print(dict)        
+            for dict in users:                     
                 
                 for key, value in dict.items():
                     pass
-                    #print()
-                value_month = value.strftime('%m')
-                #print(value_month)
+                    
+                value_month = value.strftime('%m')                
                 value_date_next = value.strftime('%d')
-                #print(value_date_next)
+               
                 if value_month == month and day_next > day_now and int(value_date_next) == int(date_) + 4:
                                 
                     print(day_next_word)
@@ -214,12 +169,7 @@ def get_birthdays_per_week(users):
                     key_dict.append(value)   
                     print(key_dict)
                     user_week.update({day_next_word: key_dict}) 
-                #key_dict = []  
-                    #count_day += 1           
-                  
-                    #value_true = value
-            #print(user_week)
-    
+                   
     users = user_week
             
 
