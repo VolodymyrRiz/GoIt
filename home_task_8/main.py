@@ -5,9 +5,7 @@ user_week = {'Monday': [],
              'Wednesday': [], 
              'Thursday': [], 
              'Friday': [], 
-            #  'Saturday': [],
-            #  'Sunday': [],
-             }
+            }
 
 
 def get_birthdays_per_week(users):
