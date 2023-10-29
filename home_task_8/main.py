@@ -10,22 +10,22 @@ user_week = {'Monday': [],
 
 def get_birthdays_per_week(users):
     
-    # b = "Робити календар днів народжень із сьогоднішнього дня\n чи з наступного понеділка або якогось наступного дня?\n З наступного понеділка або якогось наступного дня? Натиснйть 1.\n З сьогоднішнього дня? Натисніть 0." 
-    # print(b)   
-    # d = input()
+    b = "Робити календар днів народжень із сьогоднішнього дня\n чи з наступного понеділка або якогось наступного дня?\n З наступного понеділка або якогось наступного дня? Натиснйть 1.\n З сьогоднішнього дня? Натисніть 0." 
+    print(b)   
+    d = input()
     
-    # if d == '1':
-    #     print('Уведіть число дня')
-    #     d = int(input())
-    #     date_now = date.today() 
-    #     rik = date_now.year
-    #     misiac = date_now.month
-    #     den = date_now.day     
-       
-    #     date_now = datetime(rik, misiac, d) 
+    if d == '1':
+        print('Уведіть число дня')
+        d = int(input())
+        date_now = date.today() 
+        rik = date_now.year
+        misiac = date_now.month
+        den = date_now.day     
         
-    # else:
-    date_now = date.today()        
+        date_now = datetime(rik, misiac, d) 
+        
+    else:
+        date_now = date.today()        
           
     key_dict = []             
      
@@ -59,8 +59,11 @@ def get_birthdays_per_week(users):
                 same_day = value.day
                 same_month = value.month                
                 now_year = date_now.year      
-                
-                actual_datetime = datetime(now_year, same_month, same_day).date()                      
+                try:
+                    
+                    actual_datetime = datetime(now_year, same_month, same_day).date()                      
+                except ValueError:
+                    actual_datetime = datetime(now_year, same_month, same_day - 1).date()    
                                  
                 value = actual_datetime
                 value_month = value.strftime('%m')                               
@@ -273,7 +276,7 @@ def get_birthdays_per_week(users):
 
 if __name__ == "__main__":
     
-    users = [{"name": "Jan Koum", "birthday": datetime(1976, 1, 1).date()},
+    users = [{"name": "Jan Koum", "birthday": datetime(2020, 2, 29).date()},
         {"name": "Jan Grot", "birthday": datetime(1957, 2, 1).date()},
         {"name": "Jan Swift", "birthday": datetime(1977, 12, 5).date()},
         {"name": "Jan Forest", "birthday": datetime(1978, 12, 5).date()},
