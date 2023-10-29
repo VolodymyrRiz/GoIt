@@ -150,7 +150,11 @@ def get_birthdays_per_week(users):
                 same_day = value.day
                 same_month = value.month                
                 now_year = date_now.year               
-                actual_datetime = datetime(now_year, same_month, same_day).date()
+                try:
+                    
+                    actual_datetime = datetime(now_year, same_month, same_day).date()                      
+                except ValueError:
+                    actual_datetime = datetime(now_year, same_month, same_day - 1).date()    
                 value = actual_datetime
              
                     
@@ -182,7 +186,11 @@ def get_birthdays_per_week(users):
                 same_day = value.day
                 same_month = value.month                
                 now_year = date_now.year               
-                actual_datetime = datetime(now_year, same_month, same_day).date()
+                try:
+                    
+                    actual_datetime = datetime(now_year, same_month, same_day).date()                      
+                except ValueError:
+                    actual_datetime = datetime(now_year, same_month, same_day - 1).date()    
                 value = actual_datetime             
                     
                 value_month = value.strftime('%m')                
@@ -213,7 +221,11 @@ def get_birthdays_per_week(users):
                 same_day = value.day
                 same_month = value.month                
                 now_year = date_now.year               
-                actual_datetime = datetime(now_year, same_month, same_day).date()
+                try:
+                    
+                    actual_datetime = datetime(now_year, same_month, same_day).date()                      
+                except ValueError:
+                    actual_datetime = datetime(now_year, same_month, same_day - 1).date()    
                 value = actual_datetime
              
                     
@@ -245,7 +257,11 @@ def get_birthdays_per_week(users):
                 same_day = value.day
                 same_month = value.month                
                 now_year = date_now.year               
-                actual_datetime = datetime(now_year, same_month, same_day).date()
+                try:
+                    
+                    actual_datetime = datetime(now_year, same_month, same_day).date()                      
+                except ValueError:
+                    actual_datetime = datetime(now_year, same_month, same_day - 1).date()    
                 value = actual_datetime
              
                     
