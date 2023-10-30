@@ -32,6 +32,7 @@ My name is SYSTEM BOT.
 I can help you to work with contacts and their phone numbers.
 Are you ready to communicate? 
 If you are ready tell me HELLO (print please)
+or print . for exit
 '''
 while True:
     main(a)
