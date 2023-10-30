@@ -1,6 +1,8 @@
 # ДЗ9
 # "hello", відповідає у консоль "How can I help you?"
 
+import os
+
 def hello(txt):
     return txt
 
@@ -9,11 +11,21 @@ def add(txt):
 
 def main(prin_inp):
     
+       
     print(a)
     d = input()
-    if d == 'hello':
-        print('How can I help you?')ff
-    return
+    
+    if d == 'hello' or d == 'Hello' or d == 'HELLO':
+           
+        print('How can I help you?')
+        d = input()
+    elif d == '.':
+        print('Good bye. See you later!')        
+        return os.abort()
+    else:
+        print("You didn't say hello. Try again...")
+        return
+           
 
 a = '''
 My name is SYSTEM BOT. 
