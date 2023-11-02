@@ -4,30 +4,34 @@
 import os
 calc = 0
 
-
 def parser_commands(d, commands):
     
+    num = 0
     for com in commands:
-        
-        if com in d:            
+        num = d.count(' ')
+        if com in d and num == 2:            
             b = "I'm doing... Whait please!"
             d = com                     
             return d, b
+        elif com in d and (num < 2 or num > 2):
+            flag = num
+            b = input_error(flag)
+            return b
         else:
             continue
-    
-    
         
-    flag = 0
+    flag = 10
     f = input_error(flag)            
     return f
     
 def input_error(flag):
-    
+    #num = int(num)
     try:
-        if flag == 0:
+        if flag == 10:
             c = 'You can use only such commands:\n"good bye", "close", "exit", "quit", "add...", "change...", "show all", "phone..."'
-            
+            return c
+        if flag != 10 and (flag < 2 or flag > 2):
+            c = '...enter only three words: add name phone_number...'
             return c
     except:
         pass
@@ -46,7 +50,8 @@ def handler_exit(txt):
     return txt
 
 def handler_add(add_):
-    j = 'tttttttttttttttttttttt'
+    (com_, name_, phone_) = add_.split(' ')
+    
 
     return add_
 
