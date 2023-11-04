@@ -13,16 +13,16 @@ def parser_commands(d, commands):
             b = "I'm doing... Whait please!"
             d = com                     
             return d, b
-        elif com in d and (num < 2 or num > 2):
-            flag = num
-            b = input_error(flag)
-            return b
+        elif com in d and (num < 2 or num > 2):           
+            b = '...enter only three words: add name phone_number...'
+            d = num
+            return d, b
         else:
             continue
         
     flag = 10
     f = input_error(flag)            
-    return f
+    return d, f
     
 def input_error(flag):
     #num = int(num)
@@ -30,12 +30,19 @@ def input_error(flag):
         if flag == 10:
             c = 'You can use only such commands:\n"good bye", "close", "exit", "quit", "add...", "change...", "show all", "phone..."'
             return c
-        if flag != 10 and (flag < 2 or flag > 2):
-            c = '...enter only three words: add name phone_number...'
-            return c
-    except:
-        pass
-        return
+        if flag == 9:
+            c = 'First you need to enter the command, and then your name and phone number'
+            flag = c
+            return flag        
+        _phone_ = int(flag)
+        if type(_phone_) is int:
+            flag = _phone_
+            return flag
+    except ValueError:
+        c = 'The third word in the add command must be a numeric phone number'            
+        flag = c
+        return flag  
+        
 
 def handler_change(txt):
     return txt
@@ -50,12 +57,23 @@ def handler_exit(txt):
     return txt
 
 def handler_add(add_):
-    (com_, name_, phone_) = add_.split(' ')
+    com_, name_, phone_ = add_.split(' ')
     
-
-    return add_
-
-
+    if com_ != 'add' and com_ != 'ADD' and com_ != 'Add':
+        flag = 9
+        add_= input_error(flag)        
+        return add_
+    elif com_ == 'add' or com_ == 'ADD' or com_ == 'Add':
+        flag = phone_        
+        add_ = input_error(flag)
+        if not type(add_) is int:   
+            return add_
+        else:        
+            phone_dict.update({name_: add_}) # add_ номер телефону як int
+            add_ = f'The name {name_} and phone number {add_} are recorded'
+            return add_
+            
+   
 def main(a, commands):
     global calc
     b = ''
@@ -85,16 +103,18 @@ def main(a, commands):
             print(com_prnt)
             d = input()
             add_ = d
-            print(parser_commands(d, commands))
-            if d == 'add':
+            
+            d_, commands_ = parser_commands(d, commands)
+            print(commands_)
+            if d_ == 'add' or d_ == 'Add' or d_ == 'ADD':                
                 print(handler_add(add_))
-            if d == 'change':
+            if d_ == 'change':
                 print(handler_change(add_))
-            if d == 'phone':
+            if d_ == 'phone':
                 print(handler_phone(add_))
-            if d == 'show all':
+            if d_ == 'show all':
                 print(handler_show_all(add_))
-            if d == 'good bye' or d == 'close' or d == 'exit' or d == 'quit':
+            if d_ == 'good bye' or d == 'close' or d == 'exit' or d == 'quit':
                 print(handler_exit(add_))
             
         
@@ -114,7 +134,32 @@ If you are ready tell me HELLO (print please)
 or print . for exit
 '''
 
-commands = ["good bye", "close", "exit", "quit", "add", "change", "show all", "phone"]
+commands = [
+            "good bye", 
+            "close", 
+            "exit", 
+            "quit", 
+            "add", 
+            "change", 
+            "show all", 
+            "phone",
+            "Good bye", 
+            "Close", 
+            "Exit", 
+            "Quit", 
+            "Add", 
+            "Change", 
+            "Show all", 
+            "Phone",
+            "GOOD BYE", 
+            "CLOSE", 
+            "EXIT", 
+            "QUIT", 
+            "ADD", 
+            "CHANGE", 
+            "SHOW ALL", 
+            "PHONE",
+            ]
 
 phone_dict = {}
 
