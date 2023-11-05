@@ -2,6 +2,7 @@
 # "hello", відповідає у консоль "How can I help you?"
 
 import os
+
 calc = 0
 
 def parser_commands(d, commands):
@@ -69,7 +70,34 @@ def handler_add(add_):
         if not type(add_) is int:   
             return add_
         else:        
+           
+            file_ = open('phone_dict.txt')            
+            phone_dict = file_.read()
+            file_.close()            
+            phone_dict = phone_dict[1:-1]
+            phone_dict = phone_dict.replace(':', ',')
+            phone_dict_list = phone_dict.split(',')
+            cnt_ = 0
+            len_ = 0
+            phone_dict = {}
+            while len_ != len(phone_dict_list):
+                if cnt_ == 0:
+                    word1 = phone_dict_list[0].strip()
+                    word1 = word1[1:-1]
+                    phone_dict_list.pop(0)
+                    cnt_ += 1
+                if cnt_ == 1:
+                    word2 = phone_dict_list[0].strip()
+                    word2 = int(word2)
+                    phone_dict_list.pop(0)
+                    cnt_ = 0
+                phone_dict.update({word1: word2})
             phone_dict.update({name_: add_}) # add_ номер телефону як int
+            
+            file_ = open('phone_dict.txt', 'w')
+            file_.write(str(phone_dict))
+            file_.close() 
+            
             add_ = f'The name {name_} and phone number {add_} are recorded'
             return add_
             
