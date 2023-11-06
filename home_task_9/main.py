@@ -14,9 +14,17 @@ def parser_commands(d, commands):
             b = "I'm doing... Whait please!"
             d = com                     
             return d, b
-        elif com in d and (num < 2 or num > 2):           
+        elif com in d and (num < 2 or num > 2) and (not 'Show' in d or not 'Show' in d or not 'show' in d or not 'SHOW' in d) and (not 'Phone' in d or not 'Phone' in d or not 'phone' in d or not 'PHONE' in d):           
             b = '...enter only three words: add name phone_number...'
             d = num
+            return d, b
+        elif com in d and 'Show' in d or 'Show' in d or "SHOW" in d or 'show' in d:
+            b = 'Please, there are all your contacts: '            
+            return d, b
+        elif com in d and 'Phone' in d or 'Phone' in d or "PHONE" in d or 'phone' in d:
+            b = '''I advise you to first view the names in the contacts with the show all command 
+            so as not to make a mistake in writing the name, 
+            and then enter the phone command and the correct name after a space'''       
             return d, b
         else:
             continue
@@ -48,11 +56,17 @@ def input_error(flag):
 def handler_change(txt):
     return txt
 
-def handler_phone(txt):
-    return txt
+def handler_phone(add_):
+    
+    return add_
 
-def handler_show_all(txt):    
-    return txt
+def handler_show_all(add_):    
+    
+    file_ = open('phone_dict.txt')            
+    phone_dict = file_.read()
+    file_.close() 
+    add_ = phone_dict    
+    return add_
 
 def handler_exit(txt):
     return txt
@@ -140,7 +154,7 @@ def main(a, commands):
                 print(handler_change(add_))
             if d_ == 'phone':
                 print(handler_phone(add_))
-            if d_ == 'show all':
+            if d_ == 'show all' or d_ == 'Show all' or d_ == 'SHOW ALL':
                 print(handler_show_all(add_))
             if d_ == 'good bye' or d == 'close' or d == 'exit' or d == 'quit':
                 print(handler_exit(add_))
