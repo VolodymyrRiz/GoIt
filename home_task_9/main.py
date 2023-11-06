@@ -2,6 +2,7 @@
 # "hello", відповідає у консоль "How can I help you?"
 
 import os
+import re
 
 calc = 0
 
@@ -22,7 +23,13 @@ def parser_commands(d, commands):
             b = 'Please, there are all your contacts: '            
             return d, b
         elif com in d and 'Phone' in d or 'Phone' in d or "PHONE" in d or 'phone' in d:
-            b = '''I advise you to first view the names in the contacts with the show all command 
+            num = d.count(' ')
+            if num == 1:
+                imia = d[6:].strip()
+                d = imia
+                b = "I'm looking for a phone..."
+            else:
+                b = '''I advise you to first view the names in the contacts with the show all command 
             so as not to make a mistake in writing the name, 
             and then enter the phone command and the correct name after a space'''       
             return d, b
@@ -57,8 +64,16 @@ def handler_change(txt):
     return txt
 
 def handler_phone(add_):
+    file_ = open('phone_dict.txt')            
+    phone_dict = file_.read()
+    file_.close() 
+    imia_pos = phone_dict.find(add_)
+    if add_ in phone_dict:
+        nomer_poshuk = phone_dict[imia_pos]
     
-    return add_
+        return add_
+    else:
+        add_ = "Name not found!"
 
 def handler_show_all(add_):    
     
@@ -152,7 +167,8 @@ def main(a, commands):
                 print(handler_add(add_))
             if d_ == 'change':
                 print(handler_change(add_))
-            if d_ == 'phone':
+            if 'phone' in add_ or 'Phone' in add_ or "PHONE" in add_:
+                add_ = d_
                 print(handler_phone(add_))
             if d_ == 'show all' or d_ == 'Show all' or d_ == 'SHOW ALL':
                 print(handler_show_all(add_))
