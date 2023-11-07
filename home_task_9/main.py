@@ -3,7 +3,6 @@
 
 import os
 import re
-
 calc = 0
 
 def parser_commands(d, commands):
@@ -64,12 +63,10 @@ def input_error(flag):
     except ValueError:
         c = 'The third word in the add command must be a numeric phone number'            
         flag = c
-        return flag  
-        
+        return flag          
 
 def handler_change(add_):
-    com_, name_, phone_ = add_.split(' ')
-    
+    com_, name_, phone_ = add_.split(' ')    
     if com_ != 'change' and com_ != 'CHANGE' and com_ != 'Change':
         flag = 9
         add_= input_error(flag)        
@@ -79,8 +76,7 @@ def handler_change(add_):
         add_ = input_error(flag)
         if not type(add_) is int:   
             return add_
-        else:        
-           
+        else:           
             file_ = open('phone_dict.txt')            
             phone_dict = file_.read()
             file_.close()            
@@ -102,12 +98,10 @@ def handler_change(add_):
                     phone_dict_list.pop(0)
                     cnt_ = 0
                 phone_dict.update({word1: word2})
-            phone_dict.update({name_: add_}) # add_ номер телефону як int
-            
+            phone_dict.update({name_: add_}) # add_ номер телефону як int            
             file_ = open('phone_dict.txt', 'w')
             file_.write(str(phone_dict))
-            file_.close() 
-            
+            file_.close()             
             add_ = f'The name {name_} and phone number {add_} are recorded'
             return add_
     
@@ -119,8 +113,7 @@ def handler_phone(add_):
     if add_ in phone_dict:
         phone_dict_part = phone_dict[imia_pos:]
         imia_nomer = re.search('\d+', phone_dict_part)
-        add_ = imia_nomer.group()
-    
+        add_ = imia_nomer.group()    
         return add_
     else:
         add_ = "Name not found!"
@@ -137,8 +130,7 @@ def handler_exit(add_):
     return os.abort()
 
 def handler_add(add_):
-    com_, name_, phone_ = add_.split(' ')
-    
+    com_, name_, phone_ = add_.split(' ')    
     if com_ != 'add' and com_ != 'ADD' and com_ != 'Add':
         flag = 9
         add_= input_error(flag)        
@@ -148,8 +140,7 @@ def handler_add(add_):
         add_ = input_error(flag)
         if not type(add_) is int:   
             return add_
-        else:        
-           
+        else:                   
             file_ = open('phone_dict.txt')            
             phone_dict = file_.read()
             file_.close()            
@@ -171,15 +162,12 @@ def handler_add(add_):
                     phone_dict_list.pop(0)
                     cnt_ = 0
                 phone_dict.update({word1: word2})
-            phone_dict.update({name_: add_}) # add_ номер телефону як int
-            
+            phone_dict.update({name_: add_}) # add_ номер телефону як int            
             file_ = open('phone_dict.txt', 'w')
             file_.write(str(phone_dict))
-            file_.close() 
-            
+            file_.close()             
             add_ = f'The name {name_} and phone number {add_} are recorded'
-            return add_
-            
+            return add_            
    
 def main(a, commands):
     global calc
@@ -192,8 +180,7 @@ def main(a, commands):
         print('Good bye!!!')        
         return os.abort()
     
-    d = input()
-    
+    d = input()    
     if d == 'hello' or d == 'Hello' or d == 'HELLO':
         
         while True:
