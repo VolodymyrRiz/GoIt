@@ -11,7 +11,11 @@ def parser_commands(d, commands):
     num = 0
     for com in commands:
         num = d.count(' ')
-        if com in d and num == 2:            
+        if com in d and num == 2 and ('add' in d or 'add' in d or 'Add' in d or 'ADD' in d):            
+            b = "I'm doing... Whait please!"
+            d = com                     
+            return d, b
+        elif com in d and num == 2 and ('change' in d or 'change' in d or 'Change' in d or 'CHANGE' in d):            
             b = "I'm doing... Whait please!"
             d = com                     
             return d, b
@@ -32,6 +36,9 @@ def parser_commands(d, commands):
                 b = '''I advise you to first view the names in the contacts with the show all command 
             so as not to make a mistake in writing the name, 
             and then enter the phone command and the correct name after a space'''       
+            return d, b
+        elif com in d and 'good bye' in d or 'good bye' in d or "Good bye" in d or 'GOOD BYE' in d or 'close' in d or "Close" in d or 'CLOSE' in d or 'exit' in d or "Exit" in d or 'EXIT' in d or 'quit' in d or "Quit" in d or 'QUIT' in d:
+            b = 'Goog bye. I am always happy to help!'
             return d, b
         else:
             continue
@@ -60,16 +67,59 @@ def input_error(flag):
         return flag  
         
 
-def handler_change(txt):
-    return txt
-
+def handler_change(add_):
+    com_, name_, phone_ = add_.split(' ')
+    
+    if com_ != 'change' and com_ != 'CHANGE' and com_ != 'Change':
+        flag = 9
+        add_= input_error(flag)        
+        return add_
+    elif com_ == 'change' or com_ == 'Change' or com_ == 'CHANGE':
+        flag = phone_        
+        add_ = input_error(flag)
+        if not type(add_) is int:   
+            return add_
+        else:        
+           
+            file_ = open('phone_dict.txt')            
+            phone_dict = file_.read()
+            file_.close()            
+            phone_dict = phone_dict[1:-1]
+            phone_dict = phone_dict.replace(':', ',')
+            phone_dict_list = phone_dict.split(',')
+            cnt_ = 0
+            len_ = 0
+            phone_dict = {}
+            while len_ != len(phone_dict_list):
+                if cnt_ == 0:
+                    word1 = phone_dict_list[0].strip()
+                    word1 = word1[1:-1]
+                    phone_dict_list.pop(0)
+                    cnt_ += 1
+                if cnt_ == 1:
+                    word2 = phone_dict_list[0].strip()
+                    word2 = int(word2)
+                    phone_dict_list.pop(0)
+                    cnt_ = 0
+                phone_dict.update({word1: word2})
+            phone_dict.update({name_: add_}) # add_ номер телефону як int
+            
+            file_ = open('phone_dict.txt', 'w')
+            file_.write(str(phone_dict))
+            file_.close() 
+            
+            add_ = f'The name {name_} and phone number {add_} are recorded'
+            return add_
+    
 def handler_phone(add_):
     file_ = open('phone_dict.txt')            
     phone_dict = file_.read()
     file_.close() 
     imia_pos = phone_dict.find(add_)
     if add_ in phone_dict:
-        nomer_poshuk = phone_dict[imia_pos]
+        phone_dict_part = phone_dict[imia_pos:]
+        imia_nomer = re.search('\d+', phone_dict_part)
+        add_ = imia_nomer.group()
     
         return add_
     else:
@@ -83,8 +133,8 @@ def handler_show_all(add_):
     add_ = phone_dict    
     return add_
 
-def handler_exit(txt):
-    return txt
+def handler_exit(add_):
+    return os.abort()
 
 def handler_add(add_):
     com_, name_, phone_ = add_.split(' ')
@@ -165,14 +215,14 @@ def main(a, commands):
             print(commands_)
             if d_ == 'add' or d_ == 'Add' or d_ == 'ADD':                
                 print(handler_add(add_))
-            if d_ == 'change':
+            if d_ == 'change' in d or 'Change' in d or 'CHANGE' in d:
                 print(handler_change(add_))
             if 'phone' in add_ or 'Phone' in add_ or "PHONE" in add_:
                 add_ = d_
                 print(handler_phone(add_))
             if d_ == 'show all' or d_ == 'Show all' or d_ == 'SHOW ALL':
                 print(handler_show_all(add_))
-            if d_ == 'good bye' or d == 'close' or d == 'exit' or d == 'quit':
+            if d_ == 'good bye' in d or 'Good bye' in d or 'GOOD BYE' in d or 'close' in d or 'Close' in d or 'CLOSE' in d or 'exit' in d or 'Exit' in d or "EXIT" in d or 'quit' in d or "Quit" in d or 'QUIT' in d:
                 print(handler_exit(add_))
             
         
