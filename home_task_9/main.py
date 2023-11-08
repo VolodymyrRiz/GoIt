@@ -47,7 +47,7 @@ def parser_commands(d, commands):
     return d, f
     
 def input_error(flag):
-    #num = int(num)
+    
     try:
         if flag == 10:
             c = 'You can use only such commands:\n"good bye", "close", "exit", "quit", "add...", "change...", "show all", "phone..."'
@@ -79,7 +79,16 @@ def handler_change(add_):
         else:           
             file_ = open('phone_dict.txt')            
             phone_dict = file_.read()
-            file_.close()            
+            file_.close()       
+            
+            add_ = name_                 
+            imia_pos = phone_dict.find(add_)
+            if imia_pos == -1:
+                add_ = "Name not found!"                
+                return add_
+            else:
+                pass              
+                   
             phone_dict = phone_dict[1:-1]
             phone_dict = phone_dict.replace(':', ',')
             phone_dict_list = phone_dict.split(',')
@@ -94,15 +103,15 @@ def handler_change(add_):
                     cnt_ += 1
                 if cnt_ == 1:
                     word2 = phone_dict_list[0].strip()
-                    word2 = int(word2)
+                    word2 = word2[1:-1]                    
                     phone_dict_list.pop(0)
                     cnt_ = 0
                 phone_dict.update({word1: word2})
-            phone_dict.update({name_: add_}) # add_ номер телефону як int            
+            phone_dict.update({name_: phone_})           
             file_ = open('phone_dict.txt', 'w')
             file_.write(str(phone_dict))
             file_.close()             
-            add_ = f'The name {name_} and phone number {add_} are recorded'
+            add_ = f'The name {name_} and phone number {phone_} are recorded'
             return add_
     
 def handler_phone(add_):
@@ -117,12 +126,14 @@ def handler_phone(add_):
         return add_
     else:
         add_ = "Name not found!"
+        return add_
 
 def handler_show_all(add_):    
     
     file_ = open('phone_dict.txt')            
     phone_dict = file_.read()
     file_.close() 
+    phone_dict = phone_dict.replace(',', '\n')    
     add_ = phone_dict    
     return add_
 
@@ -146,7 +157,7 @@ def handler_add(add_):
             file_.close()            
             phone_dict = phone_dict[1:-1]
             phone_dict = phone_dict.replace(':', ',')
-            phone_dict_list = phone_dict.split(',')
+            phone_dict_list = phone_dict.split(',')            
             cnt_ = 0
             len_ = 0
             phone_dict = {}
@@ -158,15 +169,15 @@ def handler_add(add_):
                     cnt_ += 1
                 if cnt_ == 1:
                     word2 = phone_dict_list[0].strip()
-                    word2 = int(word2)
+                    word2 = word2[1:-1]                    
                     phone_dict_list.pop(0)
-                    cnt_ = 0
-                phone_dict.update({word1: word2})
-            phone_dict.update({name_: add_}) # add_ номер телефону як int            
+                    cnt_ = 0                    
+                phone_dict.update({word1: word2})                
+            phone_dict.update({name_: phone_}) # add_ номер телефону як int            
             file_ = open('phone_dict.txt', 'w')
             file_.write(str(phone_dict))
             file_.close()             
-            add_ = f'The name {name_} and phone number {add_} are recorded'
+            add_ = f'The name {name_} and phone number {phone_} are recorded'
             return add_            
    
 def main(a, commands):
