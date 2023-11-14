@@ -2,33 +2,25 @@
 
 from collections import UserDict
 
-
 class Field:
     
     def __init__(self, value):
-        self.value = value   
-        #print(self.value)     
+        self.value = value
+        #print(self.value)
 
     def __str__(self):
         return str(self.value)
 
-
 class Name(Field):
-    def __init__(self, name):
-        self.name = name
-        
-    def __str__(self):
-        return str(self.name)       
-       
-    
-class Phone(Field):
-    def __init__(self, phone):
-        self.phone = phone
-        
-    def __str__(self):
-        return str(self.phone)   
-    # реалізація класу     
+    # реалізація клас
+    name = ''
+    pass
 
+class Phone(Field):
+    # реалізація класу
+    phone = ''
+    pass
+   
 
 class Record:
    
@@ -41,58 +33,57 @@ class Record:
 
         
     def add_phone(self, phone):
-    
+        self.phones = []
+        print(self.phones)
+        print(phone)
         self.phone = phone
-        return self.phone
+        print(self.phone)
+    
+        #self.phones = phone
+        self_phones = self.phones.append(self.phone)
+        
+        print(self_phones)
         
     def remove_phone(self):
         pass
     
     def edit_phone(self, *argv, **kwarg):
+        
         pass
     
-    def find_phone(self, phone):
-        self.phone = phone
-        count_phone = self.phones.count(self.phone)
-        if count_phone > 0:              
-            return print(self.phone)
-        else:
-            print('jkjkjkjljljljlkjlk')
+    def find_phone(self):
+        pass
     
     def __str__(self):
         #print(f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}")
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
 
 class AddressBook(UserDict):
-    
+    def __init__(self, data):
+        self.data = data
     
     #book_phone = {Record.name.value: Record}
     # реалізація класу
 #     Реалізовано метод add_record, який додає запис до self.data.
 # Реалізовано метод find, який знаходить запис за ім'ям.
 # Реалізовано метод delete, який видаляє запис за ім'ям.
-# Записи Record у AddressBook зберігаються як значення у с.vловнику. В якості ключів використовується значення Record.name.value.
+# Записи Record у AddressBook зберігаються як значення у словнику. В якості ключів використовується значення Record.name.value.
     def add_record(self, *argv):    
-        record = book.data.update({Name: Phone})
-        print(book.data)
-        
-        return record
-        
+        self.data.update({Name: Phone})   
+        print(self.data) 
             
     def find(self, name):
-        if name in book.data:
-            print(name)   
-        else:
-            print('jjjjjjjjjjj')   
-            pass      
+        if name in self.data:
+            return name            
     
-    def delete(self, name):
-        book.delete("Jane")
+    def delete(self, data):
+        self.data.delete("Jane")
         print(f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)} is deleted")
 
     
         # Створення нової адресної книги
-book = AddressBook()
+data = {}
+book = AddressBook(data)
 
     # Створення запису для John
 john_record = Record("John")
@@ -111,9 +102,7 @@ book.add_record(jane_record)
 
     # Виведення всіх записів у книзі
 for name, record in book.data.items():
-    print(book.data)
-    print('nnnnnnnnnn', record)
-    pass
+    print(record)
 
     # Знаходження та редагування телефону для John
 john = book.find("John")
@@ -126,3 +115,4 @@ found_phone = john.find_phone("5555555555")
 print(f"{john.name}: {found_phone}")  # Виведення: 5555555555
 
     # Видалення запису Jane
+book.delete("Jane")
