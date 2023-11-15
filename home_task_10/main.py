@@ -37,8 +37,17 @@ class Record:
         return phones_
         
         
-    def remove_phone(self):
-        pass
+    def remove_phone(self, phone):
+        try:
+            self.phone = phone        
+            self.phones.remove(self.phone)        
+            phones_ = self.phones  
+            return phones_
+        except ValueError:
+            dd = f"Телефон {self.phone} відсутній"     
+            print(dd)
+            #return phones_
+        
     
     def edit_phone(self, a, b):
         index_ = self.phones.index(a)
@@ -68,6 +77,9 @@ class AddressBook(UserDict):
             count_ = str(dict_).count(str(ph_))            
             if count_ > 0:                
                 return ph_
+            if count_ == 0:
+                print('Телефон не знайдено')
+                return
             else:
                 continue
                  
@@ -93,6 +105,8 @@ Name_ = john_record.name.value
 
 john_record.add_phone("1234567890")
 phones_ = john_record.add_phone("5555555555")
+#john_record.remove_phone("1234567890")
+
 
     # Додавання запису John до адресної книги
 
@@ -102,6 +116,7 @@ book.add_record(john_record)
 jane_record = Record("Jane")
 Name_ = jane_record.name.value
 phones_ = jane_record.add_phone("9876543210")
+#phones_ = jane_record.remove_phone("9876543210")
 book.add_record(jane_record)
 
     # Виведення всіх записів у книзі
@@ -117,6 +132,8 @@ print(john)  # Виведення: Contact name: John, phones: 1112223333; 55555
     # Пошук конкретного телефону у записі John
 found_phone = book.find_phone('5555555555')
 print(f"{john}: {found_phone}")  # Виведення: 5555555555
+
+phones_ = john_record.remove_phone("1112223333")
 
     # Видалення запису Jane
 book.delete("Jane")
