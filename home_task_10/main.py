@@ -16,22 +16,32 @@ class Name(Field):
 
 class Phone(Field):
     # реалізація класу
-    pass
+    def __init__(self, value):
+        self.validate(value)
+        super().__init__(value)
+    def validate(self, phone):        
+        long_ = len(phone)
+        rah = 0
+        if long_ == 10:
+            return phone
+        else:
+            rah += 1
+            while rah < 100:
+                print("Введіть 10-значний номер")
+        
    
-
 class Record:
    
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
-        #Record.name.value
-        
+                
     # реалізація класу
-
         
-    def add_phone(self, phone):        
-               
-        self.phone = phone        
+    def add_phone(self, phone):                
+        
+        self.phone = phone                 
+        Phone.validate(self, self.phone)
         self.phones.append(self.phone)        
         phones_ = self.phones        
         return phones_
