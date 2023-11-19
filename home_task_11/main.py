@@ -28,6 +28,23 @@ class Phone(Field):
             rah += 1
             while rah < 100:
                 print("Введіть 10-значний номер")
+                
+                
+class Birthday(Field):
+    # реалізація класу
+    def __init__(self, value):
+        self.validate(value)
+        super().__init__(value)        
+            
+    def validate(self, phone):        
+        long_ = len(phone)
+        rah = 0
+        if long_ == 10:
+            return phone
+        else:
+            rah += 1
+            while rah < 100:
+                print("Введіть день народження у такому форматі: ДД/ММ/РІК, наприклад: 02/02/2000")
         
    
 class Record:
@@ -45,6 +62,9 @@ class Record:
         self.phones.append(self.phone)        
         phones_ = self.phones        
         return phones_
+    
+    def days_to_birthday(self, birth):
+        return
         
         
     def remove_phone(self, phone):
