@@ -1,6 +1,10 @@
 # DZ11
 
 from collections import UserDict
+from datetime import date, datetime
+import os
+import re
+
 
 class Field:
     
@@ -44,7 +48,7 @@ class Birthday(Field):
         else:
             rah += 1
             while rah < 100:
-                print("Введіть день народження у такому форматі: ДД/ММ/РІК, наприклад: 02/02/2000")
+                print("Введіть день народження у такому форматі: РІК-ММ-ДД, наприклад: 2000-12-31")
         
    
 class Record:
@@ -63,9 +67,22 @@ class Record:
         phones_ = self.phones        
         return phones_
     
-    def days_to_birthday(self, birth):
-        return
-        
+    def days_to_birthday(self, birth_yer, birth_mont, birth_day):
+        day_now = date.today() 
+        self.birth_yer = birth_yer
+        self.birth_mont = birth_mont
+        self.birth_day = birth_day
+        birth = date(self.birth_yer, self.birth_mont, self.birth_day)
+        Birthday.validate(self, birth)
+        dniv = birth - day_now
+        if dniv == 0:
+            txt_dniv = f'Сьогодні день народження у {Name_}'
+        if dniv < 0:    
+            txt_dniv = f'У цьому році день народження у {Name_} вже минув'     
+        if dniv > 0:
+            txt_dniv = f'До дня народження {Name_} залишилося днів - {dniv}'    
+        return txt_dniv       
+             
         
     def remove_phone(self, phone):
         try:
