@@ -40,7 +40,7 @@ class Birthday(Field):
         self.validate(value)
         super().__init__(value)        
             
-    def validate(self, phone):        
+    def validate(self, birth):        
         long_ = len(phone)
         rah = 0
         if long_ == 10:
@@ -48,7 +48,7 @@ class Birthday(Field):
         else:
             rah += 1
             while rah < 100:
-                print("Введіть день народження у такому форматі: РІК-ММ-ДД, наприклад: 2000-12-31")
+                print("Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31")
         
    
 class Record:
@@ -152,6 +152,8 @@ Name_ = john_record.name.value
 
 john_record.add_phone("1234567890")
 phones_ = john_record.add_phone("5555555555")
+birth_ = john_record.days_to_birthday(1967, 12, 10)
+print(birth_)
 #john_record.remove_phone("1234567890")
 
 
