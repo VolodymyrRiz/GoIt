@@ -1,7 +1,7 @@
 # DZ11
 
 from collections import UserDict
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import os
 import re
 
@@ -25,36 +25,44 @@ class Phone(Field):
         super().__init__(value)
     def validate(self, phone):        
         long_ = len(phone)
+        symb = str(phone).isnumeric()
         rah = 0
-        if long_ == 10:
+        if long_ == 10 and symb == True:
             return phone
         else:
             rah += 1
             while rah < 100:
-                print("Введіть 10-значний номер")
+                print("Введіть 10-значний номер без пробілів та символів")
                 
                 
 class Birthday(Field):
-    # реалізація класу
+#     # реалізація класу
     def __init__(self, value):
         self.validate(value)
-        super().__init__(value)        
+        super().__init__(value)   
+    def __str__(self):
+        self.birth = self.value
+        return self.birth     
             
-    def validate(self, birth):        
-        long_ = len(phone)
-        rah = 0
-        if long_ == 10:
-            return phone
-        else:
-            rah += 1
-            while rah < 100:
-                print("Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31")
+    def validate(self, birth):  
+        self.birth = birth
+        birth_ = self.birth
+        return birth_   
+#         long_ = len(phone)
+#         rah = 0
+#         if long_ == 10:
+#             return phone
+#         else:
+#             rah += 1
+#             while rah < 100:
+#                 print("Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31")
         
    
 class Record:
    
     def __init__(self, name):
         self.name = Name(name)
+        #self.birth = birth
         self.phones = []
                 
     # реалізація класу
@@ -72,16 +80,20 @@ class Record:
         self.birth_yer = birth_yer
         self.birth_mont = birth_mont
         self.birth_day = birth_day
-        birth = date(self.birth_yer, self.birth_mont, self.birth_day)
-        Birthday.validate(self, birth)
-        dniv = birth - day_now
-        if dniv == 0:
-            txt_dniv = f'Сьогодні день народження у {Name_}'
-        if dniv < 0:    
-            txt_dniv = f'У цьому році день народження у {Name_} вже минув'     
-        if dniv > 0:
-            txt_dniv = f'До дня народження {Name_} залишилося днів - {dniv}'    
-        return txt_dniv       
+        try:
+            birth = date(self.birth_yer, self.birth_mont, self.birth_day)
+        
+            dniv = int((birth - day_now).days)
+            if dniv == 0:
+                print(f'Сьогодні день народження у {Name_}')
+            if dniv < 0:    
+                print(f'У цьому році день народження у {Name_} вже минув')     
+            if dniv > 0:
+                print(f'До дня народження {Name_} залишилося днів - {dniv}')   
+        except:
+            birth = []                
+        
+        return birth      
              
         
     def remove_phone(self, phone):
@@ -111,7 +123,8 @@ class AddressBook(UserDict):
         self.phones = phones
     
     def add_record(self, *argv, **kwarg):            
-        self.data.update({Name_: phones_})   
+        self.data.update({Name_: phones_, Name_+'_birthday': birth_})   
+        print(self.data)
         
             
     def find(self, name):
@@ -133,8 +146,10 @@ class AddressBook(UserDict):
     
     def delete(self, rec):
         self.data.pop(rec)
-        a_ = f'DELETED {rec}'
+        self.data.pop(rec+'_birthday')
+        a_ = f'DELETED RECORD {rec}'
         print(a_)
+        print(self.data)
         
     
         # Створення нової адресної книги
@@ -142,6 +157,7 @@ data = {}
 phones = []
 phones_ = []
 phone = ''
+birth = []
 
 book = AddressBook(data, phones)
                      
@@ -152,8 +168,8 @@ Name_ = john_record.name.value
 
 john_record.add_phone("1234567890")
 phones_ = john_record.add_phone("5555555555")
-birth_ = john_record.days_to_birthday(1967, 12, 10)
-print(birth_)
+birth_ = john_record.days_to_birthday(2023, 12, 5)
+
 #john_record.remove_phone("1234567890")
 
 
@@ -165,6 +181,8 @@ book.add_record(john_record)
 jane_record = Record("Jane")
 Name_ = jane_record.name.value
 phones_ = jane_record.add_phone("9876543210")
+birth_ = jane_record.days_to_birthday(1950, 11, 10)
+
 #phones_ = jane_record.remove_phone("9876543210")
 book.add_record(jane_record)
 
