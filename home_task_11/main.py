@@ -10,7 +10,6 @@ class Field:
     
     def __init__(self, value):
         self.value = value
-        
     def __str__(self):
         return str(self.value)
 
@@ -42,27 +41,16 @@ class Birthday(Field):
         super().__init__(value)   
     def __str__(self):
         self.birth = self.value
-        return self.birth     
-            
-    def validate(self, birth):  
-        self.birth = birth
-        birth_ = self.birth
-        return birth_   
-#         long_ = len(phone)
-#         rah = 0
-#         if long_ == 10:
-#             return phone
-#         else:
-#             rah += 1
-#             while rah < 100:
-#                 print("Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31")
-        
+        return self.birth                
+    def validate(self, txt_valid):   
+        self.txt_valid = txt_valid         
+        self.txt_valid = "Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31"
+        return self.txt_valid
    
 class Record:
    
     def __init__(self, name):
-        self.name = Name(name)
-        #self.birth = birth
+        self.name = Name(name)        
         self.phones = []
                 
     # реалізація класу
@@ -76,13 +64,14 @@ class Record:
         return phones_
     
     def days_to_birthday(self, birth_yer, birth_mont, birth_day):
+        txt_valid = ' '
         day_now = date.today() 
+        rik = day_now.year
         self.birth_yer = birth_yer
         self.birth_mont = birth_mont
         self.birth_day = birth_day
         try:
-            birth = date(self.birth_yer, self.birth_mont, self.birth_day)
-        
+            birth = date(rik, self.birth_mont, self.birth_day)        
             dniv = int((birth - day_now).days)
             if dniv == 0:
                 print(f'Сьогодні день народження у {Name_}')
@@ -90,11 +79,12 @@ class Record:
                 print(f'У цьому році день народження у {Name_} вже минув')     
             if dniv > 0:
                 print(f'До дня народження {Name_} залишилося днів - {dniv}')   
+            birth = date(self.birth_yer, self.birth_mont, self.birth_day)
         except:
-            birth = []                
-        
-        return birth      
-             
+            Birthday.validate(self, txt_valid)
+            print(self.txt_valid)
+            birth = []          
+        return birth                  
         
     def remove_phone(self, phone):
         try:
@@ -105,14 +95,12 @@ class Record:
         except ValueError:
             dd = f"Телефон {self.phone} відсутній"     
             print(dd)
-            #return phones_
-        
+                    
     
     def edit_phone(self, a, b):
         index_ = self.phones.index(a)
         self.phones[index_] = b        
-        pass
-    
+        pass    
        
     def __str__(self):       
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
@@ -124,8 +112,7 @@ class AddressBook(UserDict):
     
     def add_record(self, *argv, **kwarg):            
         self.data.update({Name_: phones_, Name_+'_birthday': birth_})   
-        print(self.data)
-        
+                
             
     def find(self, name):
         if name in self.data:
@@ -144,12 +131,31 @@ class AddressBook(UserDict):
                 continue
                  
     
-    def delete(self, rec):
+    def delete(self, rec):        
         self.data.pop(rec)
         self.data.pop(rec+'_birthday')
         a_ = f'DELETED RECORD {rec}'
         print(a_)
-        print(self.data)
+                       
+        
+    def iterator(self, item_number):
+        self.item_number = item_number               
+        counter_ = 0
+        resultt = ''
+        len_data = len(self.data)
+        
+        for item_, recordd in self.data.items():            
+            resultt += f'{item_}: {recordd} \r'   
+            counter_ += 1
+            if  counter_ == len_data:
+                print(resultt)
+                return
+            if counter_ == self.item_number:                
+                print(resultt)         
+                counter_ = 0
+                resultt = ''
+                print('Продовжити перегляд? Натисніть ENTER')
+                inp = input()
         
     
         # Створення нової адресної книги
@@ -160,30 +166,22 @@ phone = ''
 birth = []
 
 book = AddressBook(data, phones)
-                     
 
     # Створення запису для John
 john_record = Record("John")
 Name_ = john_record.name.value
-
 john_record.add_phone("1234567890")
 phones_ = john_record.add_phone("5555555555")
-birth_ = john_record.days_to_birthday(2023, 12, 5)
-
-#john_record.remove_phone("1234567890")
-
+birth_ = john_record.days_to_birthday(2023, 12, 23)
 
     # Додавання запису John до адресної книги
-
 book.add_record(john_record)
 
     # Створення та додавання нового запису для Jane
 jane_record = Record("Jane")
 Name_ = jane_record.name.value
 phones_ = jane_record.add_phone("9876543210")
-birth_ = jane_record.days_to_birthday(1950, 11, 10)
-
-#phones_ = jane_record.remove_phone("9876543210")
+birth_ = jane_record.days_to_birthday(1950, 11, 21)
 book.add_record(jane_record)
 
     # Виведення всіх записів у книзі
@@ -193,14 +191,15 @@ for name, record in book.data.items():
     # Знаходження та редагування телефону для John
 john = book.find("John")
 john_record.edit_phone("1234567890", "1112223333")
-
 print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
 
     # Пошук конкретного телефону у записі John
 found_phone = book.find_phone('5555555555')
 print(f"{john}: {found_phone}")  # Виведення: 5555555555
-
 phones_ = john_record.remove_phone("1112223333")
 
     # Видалення запису Jane
 book.delete("Jane")
+
+    # ПОСТОРІНКОВИЙ ПЕРЕГЛЯД АДРЕСНОЇ КНИГИ
+book.iterator(20) 
