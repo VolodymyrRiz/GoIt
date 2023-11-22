@@ -23,15 +23,15 @@ class Phone(Field):
         self.validate(value)
         super().__init__(value)
     def validate(self, phone):        
-        long_ = len(phone)
-        symb = str(phone).isnumeric()
-        rah = 0
-        if long_ == 10 and symb == True:
-            return phone
-        else:
-            rah += 1
-            while rah < 100:
-                print("Введіть 10-значний номер без пробілів та символів")
+        while True:
+            long_ = len(phone)
+            symb = str(phone).isnumeric()
+            
+            if long_ == 10 and symb == True:
+                return phone
+            else:
+                print("Введіть номер телефона без пробілів, символів, має бути 10 цифр, натисність Enter: ")
+                phone = input()
                 
                 
 class Birthday(Field):
@@ -68,8 +68,11 @@ class Record:
         day_now = date.today() 
         rik = day_now.year
         self.birth_yer = birth_yer
+        
         self.birth_mont = birth_mont
+        
         self.birth_day = birth_day
+        
         try:
             birth = date(rik, self.birth_mont, self.birth_day)        
             dniv = int((birth - day_now).days)
@@ -112,6 +115,9 @@ class AddressBook(UserDict):
     
     def add_record(self, *argv, **kwarg):            
         self.data.update({Name_: phones_, Name_+'_birthday': birth_})   
+        print(self.data)
+        if flag_new == 1:
+            return
                 
             
     def find(self, name):
@@ -141,13 +147,15 @@ class AddressBook(UserDict):
     def iterator(self, item_number):
         self.item_number = item_number               
         counter_ = 0
+        counterr_ = 0
         resultt = ''
         len_data = len(self.data)
         
         for item_, recordd in self.data.items():            
-            resultt += f'{item_}: {recordd} \r'   
+            resultt += f'{item_}: {recordd} \n'   
             counter_ += 1
-            if  counter_ == len_data:
+            counterr_ += 1
+            if  counterr_ == len_data:
                 print(resultt)
                 return
             if counter_ == self.item_number:                
@@ -164,6 +172,7 @@ phones = []
 phones_ = []
 phone = ''
 birth = []
+flag_new = 0
 
 book = AddressBook(data, phones)
 
@@ -202,4 +211,42 @@ phones_ = john_record.remove_phone("1112223333")
 book.delete("Jane")
 
     # ПОСТОРІНКОВИЙ ПЕРЕГЛЯД АДРЕСНОЇ КНИГИ
-book.iterator(20) 
+book.iterator(10) 
+
+# ЗАПОВНЕННЯ АДРЕСНОЇ КНИГИ
+while True:
+    flag_new = 1
+    print('Заповнити адресну книгу? - Enter. Вийти? - q + Enter')
+    inp = input()
+    if inp == 'q':
+        os.abort()
+    new_name = ''
+    new_phone = ''
+    birth_yer = 0
+    birth_mont = 0
+    birth_day = 0
+    
+    print("Введіть ім'я та натисність Enter: ")
+    new_name = input()
+    
+    new_record = Record(new_name)
+    Name_ = new_record.name.value
+        
+    print("Введіть номер телефона без пробілів, символів, має бути 10 цифр, натисність Enter: ")
+    new_phone = input()
+
+    phones_ = new_record.add_phone(new_phone)
+    
+    print("Введіть дату народження.")
+    print("Рік? (чотири цифри + Enter): ")
+    birth_yer = int(input())
+   
+    print("Місяць? (дві цифри + Enter): ")
+    birth_mont = int(input())
+    
+    print("День? (дві цифри + Enter): ")
+    birth_day = int(input())
+    
+
+    birth_ = new_record.days_to_birthday(birth_yer, birth_mont, birth_day)
+    book.add_record(new_record)

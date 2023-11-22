@@ -26,6 +26,9 @@ try:
     print(birth)
 except:
     pass
+d = input()
+print(chr(d))
+
 
 
 
