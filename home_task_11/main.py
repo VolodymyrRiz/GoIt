@@ -9,10 +9,17 @@ import re
 class Field:
     
     def __init__(self, value):
+        self.__value = None
         self.value = value
+        
+    @property    
     def __str__(self):
-        return str(self.value)
-
+        return str(self.__value)
+    
+    @__str__.setter
+    def __str__(self):
+        return str(self.__value)
+       
 class Name(Field):
     # реалізація клас
     pass
@@ -20,15 +27,21 @@ class Name(Field):
 class Phone(Field):
     # реалізація класу
     def __init__(self, value):
+        #self.__phone = None
+        self.phone = value
         self.validate(value)
         super().__init__(value)
-    def validate(self, phone):        
+            
+         
+    def validate(self, phone):    
         while True:
-            long_ = len(phone)
-            symb = str(phone).isnumeric()
+            
+            self.phone = phone
+            long_ = len(self.phone)
+            symb = str(self.phone).isnumeric()
             
             if long_ == 10 and symb == True:
-                return phone
+                return self.phone
             else:
                 print("Введіть номер телефона без пробілів, символів, має бути 10 цифр, натисність Enter: ")
                 phone = input()
@@ -41,7 +54,9 @@ class Birthday(Field):
         super().__init__(value)   
     def __str__(self):
         self.birth = self.value
-        return self.birth                
+        return self.birth        
+     
+        
     def validate(self, txt_valid):   
         self.txt_valid = txt_valid         
         self.txt_valid = "Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31"
