@@ -130,7 +130,6 @@ class AddressBook(UserDict):
     
     def add_record(self, *argv, **kwarg):            
         self.data.update({Name_: phones_, Name_+'_birthday': birth_})   
-        print(self.data)
         if flag_new == 1:
             return
                 
