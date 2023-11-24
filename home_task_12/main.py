@@ -224,16 +224,22 @@ phones_ = john_record.remove_phone("1112223333")
     # Видалення запису Jane
 book.delete("Jane")
 
-    # ПОСТОРІНКОВИЙ ПЕРЕГЛЯД АДРЕСНОЇ КНИГИ
-book.iterator(10) 
+    
 
 # ЗАПОВНЕННЯ АДРЕСНОЇ КНИГИ
 while True:
     flag_new = 1
-    print('Заповнити адресну книгу? - Enter. Вийти? - q + Enter')
+    print('Заповнити адресну книгу? - Enter. Переглянути книгу? - r + Enter. Вийти? - q + Enter')
     inp = input()
     if inp == 'q':
         os.abort()
+        
+    if inp == 'r':
+            
+    # ПОСТОРІНКОВИЙ ПЕРЕГЛЯД АДРЕСНОЇ КНИГИ
+        book.iterator(10)  
+        continue   
+
     new_name = ''
     new_phone = ''
     birth_yer = 0
