@@ -4,6 +4,7 @@ from collections import UserDict
 from datetime import date, datetime, timedelta
 import os
 import re
+import json
 
 
 class Field:
@@ -124,12 +125,33 @@ class Record:
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
 
 class AddressBook(UserDict):
+    
     def __init__(self, data, phones):
         self.data = data
+        
         self.phones = phones
     
-    def add_record(self, *argv, **kwarg):            
-        self.data.update({Name_: phones_, Name_+'_birthday': birth_})   
+    def add_record(self, *argv, **kwarg):       
+        
+        # unpacked = {}
+        # with open(file_name, "r") as fh:
+        #     unpacked = json.load(fh)
+            
+
+        # unpacked is self.data    # False
+        # unpacked == self.data    # False
+        # print('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu', unpacked)
+             
+        self.data.update({Name_: phones_, Name_+'_birthday': str(birth_)}) 
+        
+        file_name = 'data.json'
+        
+        with open(file_name, "w") as fh:
+            json.dump(self.data, fh)  
+        print(self.data)
+        #unpacked is self.data    # False
+        # unpacked == self.data    # False   
+        
         if flag_new == 1:
             return
                 
@@ -154,8 +176,10 @@ class AddressBook(UserDict):
     def delete(self, rec):        
         self.data.pop(rec)
         self.data.pop(rec+'_birthday')
+        
         a_ = f'DELETED RECORD {rec}'
         print(a_)
+        
                        
         
     def iterator(self, item_number):
@@ -232,6 +256,7 @@ while True:
     print('Заповнити адресну книгу? - Enter. Переглянути книгу? - r + Enter. Вийти? - q + Enter')
     inp = input()
     if inp == 'q':
+        
         os.abort()
         
     if inp == 'r':
