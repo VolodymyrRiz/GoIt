@@ -64,6 +64,8 @@ class Birthday(Field):
         return self.txt_valid
    
 class Record:
+    
+    
    
     def __init__(self, name):
         self.name = Name(name)        
@@ -127,20 +129,21 @@ class Record:
 class AddressBook(UserDict):
     
     def __init__(self, data, phones):
-        self.data = data
-        
+        self.data = data        
         self.phones = phones
-    
+        file_name = 'data.json'
+        with open(file_name, "r") as fh:        
+            unpacked = json.load(fh)    
+            self.data = unpacked       
+
+        # unpacked is self.data    # False
+        # unpacked == self.data    # False    
+        
+            
     def add_record(self, *argv, **kwarg):       
         
         # unpacked = {}
-        # with open(file_name, "r") as fh:
-        #     unpacked = json.load(fh)
-            
-
-        # unpacked is self.data    # False
-        # unpacked == self.data    # False
-        # print('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu', unpacked)
+        
              
         self.data.update({Name_: phones_, Name_+'_birthday': str(birth_)}) 
         
@@ -148,9 +151,6 @@ class AddressBook(UserDict):
         
         with open(file_name, "w") as fh:
             json.dump(self.data, fh)  
-        print(self.data)
-        #unpacked is self.data    # False
-        # unpacked == self.data    # False   
         
         if flag_new == 1:
             return
@@ -180,7 +180,14 @@ class AddressBook(UserDict):
         a_ = f'DELETED RECORD {rec}'
         print(a_)
         
-                       
+        file_name = 'data.json'
+        
+        with open(file_name, "w") as fh:
+            json.dump(self.data, fh)  
+        
+        #print(self.data)
+        #unpacked is self.data    # False
+        # unpacked == self.data    # False                  
         
     def iterator(self, item_number):
         self.item_number = item_number               
