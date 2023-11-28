@@ -28,7 +28,7 @@ class Name(Field):
 class Phone(Field):
     # реалізація класу
     def __init__(self, value):
-        #self.__phone = None
+        
         self.phone = value
         self.validate(value)
         super().__init__(value)
@@ -63,10 +63,8 @@ class Birthday(Field):
         self.txt_valid = "Введіть день народження у такому форматі: спочатку РІК, потім місяць ММ, потім день ДД,\nнаприклад: 2000 12 31"
         return self.txt_valid
    
-class Record:
-    
-    
-   
+class Record:  
+       
     def __init__(self, name):
         self.name = Name(name)        
         self.phones = []
@@ -134,21 +132,13 @@ class AddressBook(UserDict):
         file_name = 'data.json'
         with open(file_name, "r") as fh:        
             unpacked = json.load(fh)    
-            self.data = unpacked       
-
-        # unpacked is self.data    # False
-        # unpacked == self.data    # False    
-        
+            self.data = unpacked               
             
-    def add_record(self, *argv, **kwarg):       
-        
-        # unpacked = {}
-        
-             
+    def add_record(self, *argv, **kwarg):           
+                    
         self.data.update({Name_: phones_, Name_+'_birthday': str(birth_)}) 
         
-        file_name = 'data.json'
-        
+        file_name = 'data.json'        
         with open(file_name, "w") as fh:
             json.dump(self.data, fh)  
         
@@ -180,15 +170,10 @@ class AddressBook(UserDict):
         a_ = f'DELETED RECORD {rec}'
         print(a_)
         
-        file_name = 'data.json'
-        
+        file_name = 'data.json'        
         with open(file_name, "w") as fh:
-            json.dump(self.data, fh)  
-        
-        #print(self.data)
-        #unpacked is self.data    # False
-        # unpacked == self.data    # False                  
-        
+            json.dump(self.data, fh)          
+                
     def iterator(self, item_number):
         self.item_number = item_number               
         counter_ = 0
@@ -239,31 +224,32 @@ birth_ = jane_record.days_to_birthday(1950, 11, 21)
 book.add_record(jane_record)
 
     # Виведення всіх записів у книзі
+print('Перегляд усіх записів за пошуковим словом')
+nme = input()
 for name, record in book.data.items():
-    print(name, record)
+    if nme in name or nme in record:
+        print('ЗНАЙДЕНО ЗАПИС: ')
+        print(name, record)
 
     # Знаходження та редагування телефону для John
 john = book.find("John")
 john_record.edit_phone("1234567890", "1112223333")
-print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
+print('Зроблено заміну телефона для ', john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
 
     # Пошук конкретного телефону у записі John
 found_phone = book.find_phone('5555555555')
-print(f"{john}: {found_phone}")  # Виведення: 5555555555
+print(f"'Знайдено телефон для ' {john}: {found_phone}")  # Виведення: 5555555555
 phones_ = john_record.remove_phone("1112223333")
 
     # Видалення запису Jane
 book.delete("Jane")
-
-    
 
 # ЗАПОВНЕННЯ АДРЕСНОЇ КНИГИ
 while True:
     flag_new = 1
     print('Заповнити адресну книгу? - Enter. Переглянути книгу? - r + Enter. Вийти? - q + Enter')
     inp = input()
-    if inp == 'q':
-        
+    if inp == 'q':        
         os.abort()
         
     if inp == 'r':
@@ -297,8 +283,7 @@ while True:
     birth_mont = int(input())
     
     print("День? (дві цифри + Enter): ")
-    birth_day = int(input())
-    
+    birth_day = int(input())    
 
     birth_ = new_record.days_to_birthday(birth_yer, birth_mont, birth_day)
     book.add_record(new_record)
